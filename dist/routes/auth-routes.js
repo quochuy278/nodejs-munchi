@@ -4,9 +4,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const middleware_1 = __importDefault(require("../middleware/middleware"));
+const middleware_1 = require("../middleware/middleware");
 const AuthController = require("../controller/auth-controller");
 const router = express_1.default.Router();
 router.get("/", AuthController.opening);
-router.post("/facebook", middleware_1.default, AuthController.facebookUserInfo);
+router.post("/facebook", middleware_1.verifyFacebookToken, AuthController.facebookJwtToken);
+router.post("/google", middleware_1.verifyGoogleToken, AuthController.googleJwtToken);
 exports.default = router;
